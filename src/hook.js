@@ -15,8 +15,6 @@ export function useCustomHook(params) {
         //hacer algo 
     },[])
   
-    console.log(setMessage)
-  
     if ( message === 'cero' && params >= 10 ) {
       setMessage('has llegado a la nota maxima')  
     }

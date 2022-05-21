@@ -55,6 +55,25 @@ function HookEffect(props) {
 
   })
 
+  useEffect(() => {
+   
+    console.log('me monté 2')
+  
+    if (count === 5) {
+      fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(r => r.json())
+      .then(d => console.log('data -> ', d))
+      .catch(e => console.error(e))
+    }
+
+    // VIGILA EL ESTADO ACTUAAAAAAL QUE LE PASEMOS DENTRO DEL ARRAY, SE EJECUTA CADA VEZ QUE CAMBIA
+  }, [count] )
+
+
+  // useEffect(() => {
+  //   //SOLO SE EJECUTARÁ UNA VEZ YA QUE NO TIENE NINGUNA DEPENDENCIA
+  // }, [])
+
   return <div>
     <h1 id='hi' >Hola mundo</h1>
     <h1>{count}</h1>
