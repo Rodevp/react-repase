@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
 import './index.css'
 
 
@@ -19,6 +18,7 @@ const button = React.createElement('button', {
 const root = document.getElementById('other_root')
 const element_with_js_vanilla = document.createElement('button')
 element_with_js_vanilla.textContent = 'js vanilla'
+
 element_with_js_vanilla.addEventListener('click', e => {
   say('saludando desde js vanilla')
 })
@@ -60,6 +60,90 @@ function Link({ url, refe }) {
   return <a href={url}>{refe}</a>
 }
 
+
+//Estados
+
+class ShareScreen extends React.Component {
+
+  constructor (props) {
+    
+    super(props)
+    
+    this.state = {
+      isShare: false
+    }
+
+    this.closeScreen = this.closeScreen.bind(this)
+    this.share = this.share.bind(this)
+
+  }
+
+  closeScreen(e) {
+    this.setState({
+      isShare: false
+    })
+  }
+
+  share(e) {
+    this.setState({
+      isShare: true
+    })
+  }
+
+  componentDidMount() {
+    console.log('cuando me monté -> componente padre')
+  }
+
+
+  render() {
+
+    if (this.state.isShare) {
+      console.log('share')
+    } else {
+      console.log('screen not share')
+    }
+
+    return (
+      <div>
+        {  this.state.isShare && <ShareMessage />   }
+        <button onClick={this.share}>Compartir</button>
+        <button onClick={this.closeScreen}>Dejar de compartir</button>
+      </div>
+    )
+  }
+
+}
+
+class ShareMessage extends React.Component {
+  
+  constructor(props) {
+    super(props)
+  }
+
+  //cuando el html se crea (monta) se ejecuta 
+  componentDidMount() {
+    console.log('creee dom o me monté -> componente hijo')
+  }
+
+  //cuando el html desaparece (desmonta) se ejecuta
+  componentWillUnmount() {
+    console.log('desapeci del dom o desmonté -> componente hijo')
+  }
+
+  render() {
+    return (
+      <p>
+        SHARE...
+      </p>
+    )
+  }
+
+
+}
+
+//COMPONENTES BASADOS EN FUNCIONES
+
+
 //
 const root_react = ReactDOM.createRoot(root)
 
@@ -74,5 +158,8 @@ root_react.render(
      />
   </WelcomeWithJSX> 
 )
+
+
+root_react.render(<ShareScreen />)
 
 
