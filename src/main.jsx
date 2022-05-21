@@ -106,6 +106,9 @@ class ShareScreen extends React.Component {
     return (
       <div>
         {  this.state.isShare && <ShareMessage />   }
+        {
+          this.state.isShare ? <ShareMessage /> : <p>No Share</p>
+        }
         <button onClick={this.share}>Compartir</button>
         <button onClick={this.closeScreen}>Dejar de compartir</button>
       </div>
